@@ -25,7 +25,7 @@ public class SecurityConfig {
                         .requestMatchers(
                                 "/api/users",
                                 "/api/users/login",
-                                "/api/analyze"
+                                "/api/users/analyze-ai"
                         ).permitAll()
                         .anyRequest().authenticated()
                 )
