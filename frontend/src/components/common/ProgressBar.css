@@ -1,0 +1,47 @@
+.pbar-wrap {
+  width: 100%;
+}
+.pbar-label-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+  color: var(--lilac-200);
+  margin-bottom: 7px;
+}
+.pbar-value {
+  color: var(--white);
+  font-weight: 600;
+}
+
+.pbar-track {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.07);
+  border-radius: var(--r-pill);
+  overflow: hidden;
+}
+.pbar-sm {
+  height: 5px;
+}
+.pbar-md {
+  height: 8px;
+}
+.pbar-lg {
+  height: 12px;
+}
+
+.pbar-fill {
+  height: 100%;
+  border-radius: var(--r-pill);
+}
+.pbar-fill-violet {
+  background: linear-gradient(90deg, var(--violet-500), var(--violet-400));
+}
+.pbar-fill-signal {
+  background: linear-gradient(90deg, var(--signal), #5ff0d8);
+}
+.pbar-fill-success {
+  background: var(--success);
+}
+.pbar-fill-danger {
+  background: var(--danger);
+}

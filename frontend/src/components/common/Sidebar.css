@@ -1,0 +1,118 @@
+.sidebar {
+  width: 252px;
+  flex-shrink: 0;
+  background: var(--ink-900);
+  border-right: 1px solid var(--glass-border);
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  position: sticky;
+  top: 0;
+  padding: 22px 16px;
+}
+
+.sidebar-logo {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 17px;
+  color: var(--white);
+  padding: 6px 10px 26px;
+}
+.sidebar-logo-icon {
+  color: var(--signal);
+}
+.sidebar-logo em {
+  font-style: normal;
+  color: var(--signal);
+}
+
+.sidebar-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex: 1;
+}
+
+.sidebar-link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 11px 14px;
+  border-radius: var(--r-md);
+  color: var(--lilac-200);
+  font-size: 14px;
+  font-weight: 500;
+  transition: all var(--t-fast);
+}
+.sidebar-link:hover {
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--white);
+}
+.sidebar-link-active {
+  background: linear-gradient(
+    135deg,
+    rgba(124, 92, 196, 0.28),
+    rgba(0, 229, 199, 0.08)
+  );
+  color: var(--white);
+  box-shadow: inset 0 0 0 1px var(--glass-border-strong);
+}
+
+.sidebar-foot {
+  border-top: 1px solid var(--glass-border);
+  padding-top: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.sidebar-user {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0 6px;
+}
+.sidebar-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--violet-500), var(--signal));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  color: var(--ink-950);
+  flex-shrink: 0;
+}
+.sidebar-user-name {
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--white);
+}
+.sidebar-user-email {
+  font-size: 11.5px;
+  color: rgba(239, 233, 250, 0.5);
+}
+
+.sidebar-logout {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  border-radius: var(--r-md);
+  color: var(--danger);
+  font-size: 13.5px;
+  font-weight: 500;
+}
+.sidebar-logout:hover {
+  background: rgba(242, 96, 122, 0.1);
+}
+
+@media (max-width: 900px) {
+  .sidebar {
+    display: none;
+  }
+}

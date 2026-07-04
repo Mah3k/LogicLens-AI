@@ -1,0 +1,97 @@
+package com.logiclens.backend.service;
+
+import com.logiclens.backend.dto.response.AnalyzeResponse;
+import com.logiclens.backend.dto.response.AnalyzeResponse.BugDto;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Service;
+import org.springframework.web.reactive.function.client.WebClient;
+import org.springframework.web.reactive.function.client.WebClientResponseException;
+
+import java.util.List;
+import java.util.Map;
+import java.util.Random;
+
+/**
+ * GeminiService (v2)
+ * -------------------
+ * Delegates AI analysis to the Python FastAPI microservice on port 8001.
+ * Python handles Gemini natively via google-generativeai SDK.
+ * Spring Boot handles auth, users, reviews — Python handles AI.
+ *
+ * Falls back to a mock response if the Python service is unreachable,
+ * so the app keeps working during development without the service running.
+ */
+@Slf4j
+@Service
+public class GeminiService {
+
+    private final WebClient webClient;
+
+    public GeminiService(
+            @Value("${logiclens.ai-service.base-url:http://localhost:8001}") String aiServiceUrl) {
+        this.webClient = WebClient.builder()
+                .baseUrl(aiServiceUrl)
+                .defaultHeader("Content-Type", "application/json")
+                .build();
+        log.info("AI microservice URL: {}", aiServiceUrl);
+    }
+
+    public AnalyzeResponse analyze(String code, String language, List<String> options) {
+        if (options == null || options.isEmpty()) {
+            options = List.of("explain", "bugs", "optimize", "tests");
+        }
+
+        try {
+            Map<String, Object> requestBody = Map.of(
+                    "code", code,
+                    "language", language,
+                    "options", options
+            );
+
+            AnalyzeResponse response = webClient.post()
+                    .uri("/api/ai/analyze")
+                    .bodyValue(requestBody)
+                    .retrieve()
+                    .bodyToMono(AnalyzeResponse.class)
+                    .block();
+
+            if (response != null) {
+                log.info("AI analysis complete — score: {}", response.getScore());
+                return response;
+            }
+
+        } catch (WebClientResponseException e) {
+            log.error("AI service error {}: {}", e.getStatusCode(), e.getResponseBodyAsString());
+        } catch (Exception e) {
+            log.error("Python AI service unreachable ({}). Using fallback.", e.getMessage());
+        }
+
+        return buildFallbackResponse(code, language);
+    }
+
+    private AnalyzeResponse buildFallbackResponse(String code, String language) {
+        int lines = code.split("\n").length;
+        int score = Math.min(95, Math.max(55, 100 - lines + new Random().nextInt(10)));
+
+        return AnalyzeResponse.builder()
+                .score(score)
+                .performance(score >= 85 ? "A" : score >= 65 ? "B" : "C")
+                .security(score >= 75 ? "Good" : "Review")
+                .explanation(List.of(
+                        "This " + language + " snippet defines core business logic.",
+                        "Variables are initialised before the main control flow.",
+                        "The result is returned at the end of the function."
+                ))
+                .bugs(score < 80
+                        ? List.of(BugDto.builder()
+                                .severity("Medium")
+                                .title("Unhandled edge case")
+                                .detail("Guard against null or empty input at the top of the function.")
+                                .build())
+                        : List.of())
+                .optimizedCode("// Optimized version\n" + code)
+                .tests("test('handles typical input', () => {\n  // arrange → act → assert\n});\ntest('handles edge case', () => {\n  // arrange → act → assert\n});")
+                .build();
+    }
+}

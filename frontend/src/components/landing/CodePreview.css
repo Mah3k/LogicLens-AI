@@ -1,0 +1,87 @@
+.preview {
+  width: 100%;
+  max-width: 560px;
+  overflow: hidden;
+}
+.preview-bar {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 13px 16px;
+  border-bottom: 1px solid var(--glass-border);
+}
+.preview-bar span {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.12);
+}
+.preview-bar span:nth-child(1) {
+  background: #f2607a;
+}
+.preview-bar span:nth-child(2) {
+  background: #f4b860;
+}
+.preview-bar span:nth-child(3) {
+  background: #6fd9a6;
+}
+.preview-filename {
+  margin-left: auto;
+  font-size: 11.5px;
+  color: rgba(239, 233, 250, 0.4);
+}
+
+.preview-body {
+  padding: 18px 18px 26px;
+  min-height: 280px;
+  font-size: 13px;
+}
+.preview-line {
+  display: flex;
+  gap: 12px;
+  color: var(--mist-100);
+  padding: 3px 0;
+}
+.preview-line-no {
+  color: rgba(239, 233, 250, 0.3);
+  min-width: 16px;
+}
+
+.preview-annotation {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  margin: 4px 0 6px 28px;
+  padding: 7px 11px;
+  border-radius: var(--r-sm);
+  font-size: 12px;
+  width: fit-content;
+  max-width: 90%;
+}
+.preview-annotation-bug {
+  background: rgba(242, 96, 122, 0.14);
+  color: #f89fb0;
+}
+.preview-annotation-suggest {
+  background: rgba(155, 127, 219, 0.18);
+  color: var(--lilac-200);
+}
+.preview-annotation-score {
+  background: var(--signal-soft);
+  color: var(--signal);
+  font-weight: 600;
+}
+
+.preview-cursor {
+  display: inline-block;
+  width: 7px;
+  height: 15px;
+  background: var(--signal);
+  margin-left: 28px;
+  animation: blink 1s step-end infinite;
+}
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}

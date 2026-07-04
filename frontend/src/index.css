@@ -1,0 +1,158 @@
+@import url('https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+/* ============================================
+   LOGICLENS AI — DESIGN TOKENS
+   Concept: a code editor at dusk. The product reads
+   your code in the dark and hands back clarity in the
+   light — so the UI sits on one continuous dark -> light
+   lavender gradient, like a terminal fading into morning.
+   ============================================ */
+:root {
+  --ink-950: #0F0B1A;
+  --ink-900: #161025;
+  --ink-850: #1D1530;
+  --violet-800: #2C2049;
+  --violet-700: #3D2E66;
+  --violet-600: #5B3FA0;
+  --violet-500: #7C5CC4;
+  --violet-400: #9B7FDB;
+  --lilac-300: #BBA6EA;
+  --lilac-200: #D9CCF4;
+  --mist-100: #EFE9FA;
+  --mist-50: #F8F5FD;
+  --white: #FFFFFF;
+
+  --signal: #00E5C7;
+  --signal-soft: rgba(0, 229, 199, 0.14);
+
+  --danger: #F2607A;
+  --warning: #F4B860;
+  --success: #6FD9A6;
+
+  --bg-app: linear-gradient(180deg, var(--ink-950) 0%, var(--ink-900) 38%, var(--violet-800) 72%, var(--mist-50) 100%);
+  --glass-fill: rgba(255, 255, 255, 0.045);
+  --glass-fill-strong: rgba(255, 255, 255, 0.08);
+  --glass-border: rgba(217, 204, 244, 0.14);
+  --glass-border-strong: rgba(217, 204, 244, 0.28);
+
+  --glass-fill-light: rgba(124, 92, 196, 0.05);
+  --glass-border-light: rgba(124, 92, 196, 0.14);
+
+  --font-display: 'Sora', 'Inter', sans-serif;
+  --font-body: 'Inter', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  --r-sm: 8px;
+  --r-md: 14px;
+  --r-lg: 22px;
+  --r-pill: 999px;
+
+  --shadow-glow: 0 0 0 1px var(--glass-border), 0 20px 60px -20px rgba(91, 63, 160, 0.55);
+  --shadow-soft: 0 8px 30px -12px rgba(15, 11, 26, 0.5);
+
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --t-fast: 160ms;
+  --t-med: 320ms;
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+
+body {
+  font-family: var(--font-body);
+  background: var(--ink-950);
+  color: var(--mist-100);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+#root { min-height: 100vh; }
+
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+  margin: 0;
+  letter-spacing: -0.02em;
+  color: var(--white);
+}
+
+p { margin: 0; line-height: 1.6; }
+a { color: inherit; text-decoration: none; }
+button { font-family: var(--font-body); cursor: pointer; border: none; background: none; }
+code, pre, .mono { font-family: var(--font-mono); }
+
+::selection { background: var(--violet-500); color: var(--white); }
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--violet-700); border-radius: var(--r-pill); }
+::-webkit-scrollbar-thumb:hover { background: var(--violet-600); }
+
+:focus-visible {
+  outline: 2px solid var(--signal);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+.glass {
+  background: var(--glass-fill);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--r-lg);
+}
+
+.glass-strong {
+  background: var(--glass-fill-strong);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid var(--glass-border-strong);
+  border-radius: var(--r-lg);
+}
+
+.glass-light {
+  background: var(--white);
+  border: 1px solid var(--glass-border-light);
+  border-radius: var(--r-lg);
+  box-shadow: var(--shadow-soft);
+}
+
+.container {
+  width: 100%;
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: 12.5px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--signal);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.gradient-text {
+  background: linear-gradient(90deg, var(--lilac-200), var(--signal) 90%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px; height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+

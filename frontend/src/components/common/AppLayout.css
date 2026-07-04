@@ -1,0 +1,18 @@
+.applayout {
+  display: flex;
+  min-height: 100vh;
+  background: var(--ink-950);
+}
+.applayout-main {
+  flex: 1;
+  min-width: 0;
+}
+.applayout-content {
+  padding: 28px;
+  max-width: 1320px;
+}
+@media (max-width: 600px) {
+  .applayout-content {
+    padding: 18px;
+  }
+}

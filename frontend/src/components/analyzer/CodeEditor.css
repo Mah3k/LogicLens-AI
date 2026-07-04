@@ -1,0 +1,103 @@
+.editor {
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 420px;
+}
+
+.editor-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--glass-border);
+}
+.editor-dots {
+  display: flex;
+  gap: 6px;
+}
+.editor-dots span {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.12);
+}
+.editor-dots span:nth-child(1) {
+  background: #f2607a;
+}
+.editor-dots span:nth-child(2) {
+  background: #f4b860;
+}
+.editor-dots span:nth-child(3) {
+  background: #6fd9a6;
+}
+
+.editor-bar-right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.editor-lang {
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--mist-100);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--r-sm);
+  padding: 6px 10px;
+  font-size: 12.5px;
+}
+.editor-upload-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12.5px;
+  color: var(--lilac-200);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--glass-border);
+  padding: 6px 12px;
+  border-radius: var(--r-sm);
+}
+.editor-upload-btn:hover {
+  color: var(--white);
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.editor-filename {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  color: var(--signal);
+  padding: 8px 16px 0;
+}
+
+.editor-body {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+.editor-gutter {
+  padding: 16px 12px;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  line-height: 1.65;
+  color: rgba(239, 233, 250, 0.28);
+  text-align: right;
+  user-select: none;
+  border-right: 1px solid var(--glass-border);
+  min-width: 40px;
+}
+.editor-textarea {
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  resize: none;
+  color: var(--mist-100);
+  padding: 16px;
+  font-size: 13px;
+  line-height: 1.65;
+}
+.editor-textarea::placeholder {
+  color: rgba(239, 233, 250, 0.3);
+}

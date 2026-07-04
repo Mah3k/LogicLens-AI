@@ -1,0 +1,86 @@
+.progress-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+  margin-bottom: 18px;
+}
+.progress-skills {
+  margin-bottom: 18px;
+}
+.progress-skills h3 {
+  font-size: 16px;
+  margin-bottom: 18px;
+}
+.progress-skills-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px 28px;
+}
+
+.progress-insights-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.progress-insight {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 12px 14px;
+  background: var(--signal-soft);
+  border-radius: var(--r-md);
+  color: var(--mist-100);
+}
+.progress-insight svg {
+  color: var(--signal);
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+.progress-insight p {
+  font-size: 13.5px;
+}
+
+@media (max-width: 900px) {
+  .progress-grid,
+  .progress-skills-grid {
+    grid-template-columns: 1fr;
+  }
+}
+.profile-overview {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-top: 8px;
+}
+
+.profile-overview-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px;
+  border-radius: 12px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+}
+
+.profile-overview-item svg {
+  color: var(--signal);
+  flex-shrink: 0;
+}
+
+.profile-overview-item div {
+  display: flex;
+  flex-direction: column;
+}
+
+.profile-overview-item strong {
+  color: var(--white);
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.profile-overview-item span {
+  color: rgba(239,233,250,0.65);
+  font-size: 13px;
+  margin-top: 2px;
+}

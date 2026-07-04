@@ -1,0 +1,198 @@
+.history-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-bottom: 22px;
+}
+.history-search {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--r-pill);
+  padding: 10px 16px;
+  min-width: 240px;
+  color: var(--lilac-300);
+}
+.history-search input {
+  background: transparent;
+  border: none;
+  outline: none;
+  color: var(--white);
+  font-size: 13.5px;
+  flex: 1;
+}
+.history-filters {
+  display: flex;
+  gap: 8px;
+}
+
+.history-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+.history-card {
+  padding: 0;
+}
+.history-card-click {
+  width: 100%;
+  text-align: left;
+  padding: 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.history-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.history-lang {
+  font-size: 11.5px;
+  font-weight: 700;
+  color: var(--violet-400);
+  background: rgba(124, 92, 196, 0.15);
+  padding: 4px 10px;
+  border-radius: var(--r-pill);
+}
+.history-title {
+  font-size: 14.5px;
+  font-weight: 600;
+  color: var(--white);
+}
+.history-date {
+  font-size: 12px;
+  color: rgba(239, 233, 250, 0.5);
+}
+
+.history-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  text-align: center;
+  padding: 60px 30px;
+  color: var(--lilac-300);
+}
+.history-empty h3 {
+  color: var(--white);
+  font-size: 16px;
+}
+.history-empty p {
+  font-size: 13.5px;
+  color: rgba(239, 233, 250, 0.55);
+}
+
+@media (max-width: 900px) {
+  .history-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (max-width: 600px) {
+  .history-grid {
+    grid-template-columns: 1fr;
+  }
+}
+.history-main{
+cursor:pointer;
+}
+
+.history-actions{
+
+display:flex;
+
+gap:10px;
+
+margin-top:18px;
+
+}
+
+.history-modal{
+
+position:fixed;
+
+inset:0;
+
+background:rgba(0,0,0,.55);
+
+display:flex;
+
+justify-content:center;
+
+align-items:center;
+
+z-index:999;
+
+}
+
+.history-modal-card{
+
+background:#1b1532;
+
+padding:25px;
+
+border-radius:16px;
+
+width:420px;
+
+border:1px solid rgba(255,255,255,.08);
+
+}
+
+.history-modal-head{
+
+display:flex;
+
+justify-content:space-between;
+
+align-items:center;
+
+margin-bottom:18px;
+
+}
+
+.history-modal-head button{
+
+background:none;
+
+border:none;
+
+color:white;
+
+cursor:pointer;
+
+}
+
+.history-input{
+
+width:100%;
+
+padding:12px;
+
+border-radius:10px;
+
+background:#241d43;
+
+border:1px solid rgba(255,255,255,.08);
+
+color:white;
+
+margin-bottom:20px;
+
+}
+
+.history-modal-buttons{
+
+display:flex;
+
+justify-content:flex-end;
+
+gap:12px;
+
+margin-top:18px;
+
+}
