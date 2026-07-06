@@ -87,7 +87,7 @@ public class SecurityConfig {
 
         CorsConfiguration configuration = new CorsConfiguration();
 
-        configuration.setAllowedOrigins(List.of("http://localhost:5173"));
+        configuration.setAllowedOrigins(List.of( "https://logic-lens-q0j8vxk1i-pirjademahek02-8654s-projects.vercel.app"));
         configuration.setAllowedMethods(List.of(
                 "GET",
                 "POST",
