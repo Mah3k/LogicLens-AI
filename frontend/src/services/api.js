@@ -37,10 +37,12 @@ api.interceptors.response.use(
     if (error.response?.status === 401) {
       localStorage.removeItem("logiclens_token");
       localStorage.removeItem("logiclens_user");
+      sessionStorage.removeItem("logiclens_token");
+      sessionStorage.removeItem("logiclens_user");
     }
 
     return Promise.reject(error);
-  },
+  }
 );
 
 // =====================================================
@@ -49,7 +51,7 @@ api.interceptors.response.use(
 
 export async function loginRequest(email, password) {
   try {
-    const { data } = await api.post("/auth/login", {
+    const { data } = await api.post("/api/auth/login", {
       email,
       password,
     });
@@ -61,14 +63,14 @@ export async function loginRequest(email, password) {
     }
 
     throw new Error(
-      err.response?.data?.message || "Invalid email or password.",
+      err.response?.data?.message || "Invalid email or password."
     );
   }
 }
 
 export async function registerRequest(name, email, password) {
   try {
-    const { data } = await api.post("/auth/register", {
+    const { data } = await api.post("/api/auth/register", {
       name,
       email,
       password,
@@ -81,7 +83,7 @@ export async function registerRequest(name, email, password) {
     }
 
     throw new Error(
-      err.response?.data?.message || "Could not create your account.",
+      err.response?.data?.message || "Could not create your account."
     );
   }
 }
@@ -103,7 +105,7 @@ function mockAuthResponse(name, email) {
 
 export async function analyzeCodeRequest(payload) {
   try {
-    const { data } = await api.post("/analyze", payload);
+    const { data } = await api.post("/api/analyze", payload);
     return data;
   } catch (err) {
     if (err.code === "ERR_NETWORK") {
@@ -119,12 +121,12 @@ export async function analyzeCodeRequest(payload) {
 // =====================================================
 
 export async function getHistoryRequest() {
-  const { data } = await api.get("/reviews");
+  const { data } = await api.get("/api/reviews");
   return data;
 }
 
 export async function getReviewRequest(id) {
-  const { data } = await api.get(`/reviews/${id}`);
+  const { data } = await api.get(`/api/reviews/${id}`);
   return data;
 }
 
@@ -133,7 +135,7 @@ export async function getReviewRequest(id) {
 // =====================================================
 
 export async function getDashboardStatsRequest() {
-  const { data } = await api.get("/dashboard/stats");
+  const { data } = await api.get("/api/dashboard/stats");
   return data;
 }
 
@@ -142,30 +144,40 @@ export async function getDashboardStatsRequest() {
 // =====================================================
 
 export async function getProfileRequest() {
-  const { data } = await api.get("/user/profile");
+  const { data } = await api.get("/api/user/profile");
   return data;
 }
 
 export async function updateProfileRequest(payload) {
-  const { data } = await api.put("/user/profile", payload);
+  const { data } = await api.put("/api/user/profile", payload);
   return data;
 }
 
 export async function changePasswordRequest(payload) {
-  const { data } = await api.patch("/user/password", payload);
+  const { data } = await api.patch("/api/user/password", payload);
   return data;
 }
 
 export async function deleteAccountRequest() {
-  const { data } = await api.delete("/user/account");
+  const { data } = await api.delete("/api/user/account");
   return data;
 }
+
+// =====================================================
+// PROGRESS
+// =====================================================
+
 export async function getProgressRequest() {
-  const { data } = await api.get("/progress");
+  const { data } = await api.get("/api/progress");
   return data;
 }
+
+// =====================================================
+// REVIEW MANAGEMENT
+// =====================================================
+
 export async function renameReviewRequest(id, title) {
-  const { data } = await api.patch(`/reviews/${id}/title`, {
+  const { data } = await api.patch(`/api/reviews/${id}/title`, {
     title,
   });
 
@@ -173,40 +185,49 @@ export async function renameReviewRequest(id, title) {
 }
 
 export async function deleteReviewRequest(id) {
-  const { data } = await api.delete(`/reviews/${id}`);
-
+  const { data } = await api.delete(`/api/reviews/${id}`);
   return data;
 }
+
+// =====================================================
+// PASSWORD RESET
+// =====================================================
+
 export async function forgotPasswordRequest(email) {
-  const { data } = await api.post("/auth/forgot-password", {
+  const { data } = await api.post("/api/auth/forgot-password", {
     email,
   });
+
   return data;
 }
 
 export async function verifyOtpRequest(email, otp) {
-  const { data } = await api.post("/auth/verify-otp", {
+  const { data } = await api.post("/api/auth/verify-otp", {
     email,
     otp,
   });
+
   return data;
 }
 
 export async function resetPasswordRequest(email, otp, newPassword) {
-  const { data } = await api.post("/auth/reset-password", {
+  const { data } = await api.post("/api/auth/reset-password", {
     email,
     otp,
     newPassword,
   });
+
   return data;
 }
+
 export async function resendOtpRequest(email) {
-  const { data } = await api.post("/auth/forgot-password", {
+  const { data } = await api.post("/api/auth/forgot-password", {
     email,
   });
 
   return data;
 }
+
 // =====================================================
 // MOCKS
 // =====================================================
