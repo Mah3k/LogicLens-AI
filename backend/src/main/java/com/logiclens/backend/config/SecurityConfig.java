@@ -37,8 +37,7 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
         http
-                .cors(cors -> {
-                })
+                .cors(cors -> cors.configurationSource(corsConfigurationSource()))
                 .csrf(csrf -> csrf.disable())
 
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
@@ -91,7 +90,9 @@ public class SecurityConfig {
 
         CorsConfiguration configuration = new CorsConfiguration();
 
-        configuration.setAllowedOrigins(List.of("https://logic-lens-ai-fawn.vercel.app"));
+        configuration.setAllowedOrigins(List.of(
+                "https://logic-lens-ai-fawn.vercel.app"));
+
         configuration.setAllowedMethods(List.of(
                 "GET",
                 "POST",
@@ -99,7 +100,9 @@ public class SecurityConfig {
                 "PATCH",
                 "DELETE",
                 "OPTIONS"));
+
         configuration.setAllowedHeaders(List.of("*"));
+
         configuration.setAllowCredentials(true);
 
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
@@ -108,5 +111,4 @@ public class SecurityConfig {
 
         return source;
     }
-
 }
