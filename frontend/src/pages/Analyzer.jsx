@@ -8,7 +8,7 @@ import {
   CheckCircle,
 } from "lucide-react";
 
-import { CODE_TEMPLATES } from "../utils/codeTemplates";
+import { CODE_TEMPLATES } from "../utils/CodeTemplates";
 
 import AppLayout from "../components/common/AppLayout";
 import CodeEditor from "../components/analyzer/CodeEditor";
