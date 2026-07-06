@@ -91,7 +91,7 @@ public class SecurityConfig {
 
         CorsConfiguration configuration = new CorsConfiguration();
 
-        configuration.setAllowedOrigins(List.of(frontendUrl));
+        configuration.setAllowedOrigins(List.of("https://logic-lens-ai-fawn.vercel.app"));
         configuration.setAllowedMethods(List.of(
                 "GET",
                 "POST",
