@@ -29,7 +29,7 @@ public class GeminiService {
     private final WebClient webClient;
 
     public GeminiService(
-            @Value("${logiclens.ai-service.base-url:http://localhost:8001}") String aiServiceUrl) {
+            @Value("${ai-service.base-url}") String aiServiceUrl) {
         this.webClient = WebClient.builder()
                 .baseUrl(aiServiceUrl)
                 .defaultHeader("Content-Type", "application/json")
