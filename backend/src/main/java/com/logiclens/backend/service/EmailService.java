@@ -17,22 +17,34 @@ public class EmailService {
 
     public void sendEmail(String to, String subject, String body) {
 
-        SimpleMailMessage message = new SimpleMailMessage();
+        try {
 
-        message.setFrom(fromEmail);
-        message.setTo(to);
-        message.setSubject(subject);
-        message.setText(body);
+            SimpleMailMessage message = new SimpleMailMessage();
 
-        mailSender.send(message);
+            message.setFrom(fromEmail);
+            message.setTo(to);
+            message.setSubject(subject);
+            message.setText(body);
+
+            mailSender.send(message);
+
+            System.out.println("EMAIL SENT SUCCESSFULLY");
+
+        } catch (Exception e) {
+
+            e.printStackTrace();
+
+            System.out.println("EMAIL ERROR: " + e.getMessage());
+
+            throw e;
+        }
     }
 
     public void sendOtp(String to, String otp) {
 
         String subject = "LogicLens AI - Password Reset OTP";
 
-        String body =
-                "Hello,\n\n" +
+        String body = "Hello,\n\n" +
                 "Your LogicLens AI password reset OTP is:\n\n" +
                 otp +
                 "\n\nThis OTP will expire in 5 minutes.\n\n" +
