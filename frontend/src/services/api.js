@@ -58,10 +58,6 @@ export async function loginRequest(email, password) {
 
     return data;
   } catch (err) {
-    if (err.code === "ERR_NETWORK") {
-      return mockAuthResponse(email.split("@")[0], email);
-    }
-
     throw new Error(
       err.response?.data?.message || "Invalid email or password."
     );
@@ -78,25 +74,10 @@ export async function registerRequest(name, email, password) {
 
     return data;
   } catch (err) {
-    if (err.code === "ERR_NETWORK") {
-      return mockAuthResponse(name, email);
-    }
-
     throw new Error(
       err.response?.data?.message || "Could not create your account."
     );
   }
-}
-
-function mockAuthResponse(name, email) {
-  return {
-    token: "demo-token",
-    user: {
-      id: "demo",
-      name,
-      email,
-    },
-  };
 }
 
 // =====================================================
@@ -229,7 +210,7 @@ export async function resendOtpRequest(email) {
 }
 
 // =====================================================
-// MOCKS
+// MOCK ANALYSIS
 // =====================================================
 
 function mockAnalysis(payload) {
