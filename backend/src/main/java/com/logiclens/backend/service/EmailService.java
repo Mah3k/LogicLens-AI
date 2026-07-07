@@ -19,6 +19,12 @@ public class EmailService {
 
         try {
 
+            System.out.println("========== EMAIL DEBUG ==========");
+            System.out.println("FROM : " + fromEmail);
+            System.out.println("TO   : " + to);
+            System.out.println("HOST : smtp.gmail.com");
+            System.out.println("PORT : 587");
+
             SimpleMailMessage message = new SimpleMailMessage();
 
             message.setFrom(fromEmail);
@@ -29,14 +35,14 @@ public class EmailService {
             mailSender.send(message);
 
             System.out.println("EMAIL SENT SUCCESSFULLY");
+            System.out.println("================================");
 
         } catch (Exception e) {
 
+            System.out.println("EMAIL SENDING FAILED");
             e.printStackTrace();
 
-            System.out.println("EMAIL ERROR: " + e.getMessage());
-
-            throw e;
+            throw new RuntimeException("Email sending failed", e);
         }
     }
 
@@ -44,7 +50,8 @@ public class EmailService {
 
         String subject = "LogicLens AI - Password Reset OTP";
 
-        String body = "Hello,\n\n" +
+        String body =
+                "Hello,\n\n" +
                 "Your LogicLens AI password reset OTP is:\n\n" +
                 otp +
                 "\n\nThis OTP will expire in 5 minutes.\n\n" +
