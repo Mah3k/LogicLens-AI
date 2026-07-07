@@ -88,7 +88,7 @@ public class SecurityConfig {
 
         configuration.setAllowedOrigins(List.of(
                 "http://localhost:5173",
-                "https://logic-lens-ai-fawn.vercel.app"));
+                "https://*.vercel.app"));
 
         configuration.setAllowedMethods(List.of(
                 "GET",
