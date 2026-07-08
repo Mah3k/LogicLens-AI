@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import {
   Menu,
   X,
@@ -10,7 +10,9 @@ import {
   TrendingUp,
   User,
   Settings,
+  LogOut,
 } from "lucide-react";
+import { useAuth } from "../../context/AuthContext";
 
 import "./Topbar.css";
 
@@ -25,6 +27,8 @@ const NAV = [
 
 export default function Topbar({ title }) {
   const [drawer, setDrawer] = useState(false);
+  const { logout, user } = useAuth();
+  const navigate = useNavigate();
 
   return (
     <>
@@ -87,6 +91,28 @@ export default function Topbar({ title }) {
                 </NavLink>
               ))}
             </nav>
+
+            <div className="sidebar-foot">
+              <div className="sidebar-user">
+                <div className="sidebar-avatar">
+                  {(user?.name || "D").charAt(0).toUpperCase()}
+                </div>
+                <div>
+                  <p className="sidebar-user-name">{user?.name || "Developer"}</p>
+                  <p className="sidebar-user-email">{user?.email || ""}</p>
+                </div>
+              </div>
+              <button
+                className="sidebar-logout"
+                onClick={() => {
+                  setDrawer(false);
+                  logout();
+                  navigate("/", { replace: true });
+                }}
+              >
+                <LogOut size={16} /> Log out
+              </button>
+            </div>
           </div>
         </div>
       )}

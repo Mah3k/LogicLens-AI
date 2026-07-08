@@ -5,7 +5,10 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
+
+import com.logiclens.backend.exception.BadRequestException;
 
 import java.util.List;
 import java.util.Map;
@@ -52,15 +55,24 @@ public class EmailService {
         HttpEntity<Map<String, Object>> entity =
                 new HttpEntity<>(request, headers);
 
-        ResponseEntity<String> response =
-                restTemplate.exchange(
-                        url,
-                        HttpMethod.POST,
-                        entity,
-                        String.class
-                );
+        try {
+            ResponseEntity<String> response =
+                    restTemplate.exchange(
+                            url,
+                            HttpMethod.POST,
+                            entity,
+                            String.class
+                    );
 
-        log.info("Brevo Response : {}", response.getBody());
+            log.info("Brevo Response : {}", response.getBody());
+
+        } catch (RestClientException e) {
+
+            log.error("Brevo email send failed for recipient {} — {}", to, e.getMessage(), e);
+
+            throw new BadRequestException(
+                    "Could not send the email right now. Please try again in a moment.");
+        }
 
     }
 
