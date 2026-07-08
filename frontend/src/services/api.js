@@ -170,36 +170,61 @@ export async function deleteReviewRequest(id) {
 // =====================================================
 
 export async function forgotPasswordRequest(email) {
-  const { data } = await api.post("/api/auth/forgot-password", {
-    email,
-  });
+  try {
+    const { data } = await api.post("/api/auth/forgot-password", {
+      email,
+    });
 
-  return data;
+    return data;
+  } catch (err) {
+    throw new Error(
+      err.response?.data?.message ||
+        "Could not send OTP. Please try again."
+    );
+  }
 }
 
 export async function verifyOtpRequest(email, otp) {
-  const { data } = await api.post("/api/auth/verify-otp", {
-    email,
-    otp,
-  });
+  try {
+    const { data } = await api.post("/api/auth/verify-otp", {
+      email,
+      otp,
+    });
 
-  return data;
+    return data;
+  } catch (err) {
+    throw new Error(
+      err.response?.data?.message || "Could not verify OTP."
+    );
+  }
 }
 
 export async function resetPasswordRequest(email, otp, newPassword) {
-  const { data } = await api.post("/api/auth/reset-password", {
-    email,
-    otp,
-    newPassword,
-  });
+  try {
+    const { data } = await api.post("/api/auth/reset-password", {
+      email,
+      otp,
+      newPassword,
+    });
 
-  return data;
+    return data;
+  } catch (err) {
+    throw new Error(
+      err.response?.data?.message || "Could not reset password."
+    );
+  }
 }
 
 export async function resendOtpRequest(email) {
-  const { data } = await api.post("/api/auth/forgot-password", {
-    email,
-  });
+  try {
+    const { data } = await api.post("/api/auth/forgot-password", {
+      email,
+    });
 
-  return data;
+    return data;
+  } catch (err) {
+    throw new Error(
+      err.response?.data?.message || "Could not resend OTP."
+    );
+  }
 }
