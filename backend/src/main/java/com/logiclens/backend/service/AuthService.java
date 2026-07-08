@@ -85,6 +85,8 @@ public class AuthService {
 
         } catch (AuthenticationException e) {
 
+            log.warn("Login failed for {} — {}: {}", request.getEmail(), e.getClass().getSimpleName(), e.getMessage());
+
             throw new BadRequestException("Invalid email or password.");
         }
 

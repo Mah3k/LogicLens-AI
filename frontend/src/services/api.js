@@ -1,5 +1,4 @@
 import axios from "axios";
-import { buildMockAnalysis } from "../utils/mockData";
 
 // =====================================================
 // API BASE
@@ -89,10 +88,6 @@ export async function analyzeCodeRequest(payload) {
     const { data } = await api.post("/api/analyze", payload);
     return data;
   } catch (err) {
-    if (err.code === "ERR_NETWORK") {
-      return mockAnalysis(payload);
-    }
-
     throw new Error(err.response?.data?.message || "Analysis failed.");
   }
 }
@@ -207,14 +202,4 @@ export async function resendOtpRequest(email) {
   });
 
   return data;
-}
-
-// =====================================================
-// MOCK ANALYSIS
-// =====================================================
-
-function mockAnalysis(payload) {
-  return new Promise((resolve) => {
-    setTimeout(() => resolve(buildMockAnalysis(payload)), 1400);
-  });
 }
