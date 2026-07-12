@@ -15,7 +15,7 @@ export default function ScoreChart({
   xKey = "label",
 }) {
   return (
-    <ResponsiveContainer width="100%" height={220}>
+    <ResponsiveContainer width="100%" height={220} debounce={100}>
       <AreaChart
         data={data}
         margin={{ top: 10, right: 10, left: -18, bottom: 0 }}

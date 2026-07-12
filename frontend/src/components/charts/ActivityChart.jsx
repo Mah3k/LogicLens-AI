@@ -11,7 +11,7 @@ import {
 
 export default function ActivityChart({ data }) {
   return (
-    <ResponsiveContainer width="100%" height={200}>
+    <ResponsiveContainer width="100%" height={200} debounce={100}>
       <BarChart
         data={data}
         margin={{ top: 10, right: 10, left: -18, bottom: 0 }}
