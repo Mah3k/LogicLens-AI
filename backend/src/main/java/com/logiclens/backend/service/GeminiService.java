@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.reactive.function.client.WebClientResponseException;
 
+import java.time.Duration;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
@@ -49,30 +50,39 @@ public class GeminiService {
                     "options", options
             );
 
+            log.info("Calling AI microservice at /api/ai/analyze ...");
+
             AnalyzeResponse response = webClient.post()
                     .uri("/api/ai/analyze")
                     .bodyValue(requestBody)
                     .retrieve()
                     .bodyToMono(AnalyzeResponse.class)
+                    .timeout(Duration.ofSeconds(25))
                     .block();
 
             if (response != null) {
-                log.info("AI analysis complete — score: {}", response.getScore());
+                log.info("REAL AI analysis complete — score: {}", response.getScore());
                 return response;
             }
 
         } catch (WebClientResponseException e) {
-            log.error("AI service error {}: {}", e.getStatusCode(), e.getResponseBodyAsString());
+            log.error("AI service returned an error {}: {}", e.getStatusCode(), e.getResponseBodyAsString());
         } catch (Exception e) {
-            log.error("Python AI service unreachable ({}). Using fallback.", e.getMessage());
+            log.error("AI service unreachable or timed out ({}). Using FALLBACK response.", e.toString());
         }
 
+        log.warn("Returning FALLBACK (non-AI) response — real AI service did not respond.");
         return buildFallbackResponse(code, language);
     }
 
     private AnalyzeResponse buildFallbackResponse(String code, String language) {
         int lines = code.split("\n").length;
-        int score = Math.min(95, Math.max(55, 100 - lines + new Random().nextInt(10)));
+
+        // Wider, less predictable range so a broken AI connection doesn't
+        // silently produce the same score for every review.
+        int base = 55 + new Random().nextInt(40); // 55–94
+        int lengthPenalty = Math.min(15, lines / 10);
+        int score = Math.max(50, base - lengthPenalty);
 
         return AnalyzeResponse.builder()
                 .score(score)
